@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validação Formuário</title>
+    <script>
+        function validarDados(){
+            var nome = document.getElementById('nome')
+            var endereco = document.getElementById('endereco')
+            var bairro = document.getElementById('bairro')
+            var cep = document.getElementById('cep')
+            var cidade = document.getElementById('cidade')
+            var estado = document.getElementById('estado')
+            var telefone_fixo = document.getElementById('telefone_fixo')
+            var celular = document.getElementById('celular')
+            var rg = document.getElementById('rg')
+            var cpf = document.getElementById('cpf')
+            
+            var mensagem_erro = document.getElementById('erro')
+            var erro_nome = document.getElementById('erro-nome')
+            var erro_endereco = document.getElementById('erro-endereco')
+            var erro_bairro = document.getElementById('erro-bairro')
+            var msg = ""
+
+            if(!nome.value || !endereco.value || !bairro.value || !cep.value || !cidade.value || !estado.value || !telefone_fixo.value || !celular.value || !rg.value || !cpf.value){
+                if(!nome.value){
+                    console.log(msg)
+                    msg = "Nome está vazio"
+                    erro_nome.innerHTML = msg
+                }else{
+                    console.log(msg)
+                    msg = ""
+                    erro_nome.innerHTML = msg
+                }
+
+                if(!endereco.value){
+                    msg = "Endereço está vazio"
+                    console.log(msg)
+                    erro_endereco.innerHTML = msg
+                }else{
+                    console.log(msg)
+                    msg = ""
+                    erro_endereco.innerHTML = msg
+                }
+
+                if(!bairro.value){
+                    msg = "Bairro está vazio"
+                    erro_bairro.innherHTML = msg
+                }
+
+                if(!cep.value){
+                    msg = "CEP está vazio"
+                    console.log(msg)
+                }
+
+                if(!cidade.value){
+                    msg = "Cidade está vazio"
+                    console.log(msg)
+                }
+
+                if(!estado.value){
+                    msg = "Estado está vazio"
+                    console.log(msg)
+                }
+
+                if(!telefone_fixo.value){
+                    msg = "Telefone está vazio"
+                    console.log(msg)
+                }
+
+                if(!celular.value){
+                    msg = "Celular está vazio"
+                    console.log(msg)
+                }
+
+                if(!rg.value){
+                    msg = "RG está vazio"
+                    console.log(msg)
+                }
+
+                if(!cpf.value){
+                    msg = "CPF está vazio"
+                    console.log(msg)
+                }
+
+            }else{
+                if(cpf.value <= 11){
+                    console.log("O CPF precisa ter no minimo 11 digitos")
+                }
+
+                if(rg.value <= 7){
+                    console.log("O RG precisa ter no minimo 7 digitos")
+                }
+
+            }
+            
+        } 
+
+        function mascaraCPF() {
+            const cpfInput = document.getElementById('cpf');
+            let cpf = cpfInput.value;
+
+            cpf = cpf.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+
+            if (cpf.length > 11) {
+                cpf = cpf.substring(0, 11); // Limita a 11 dígitos
+            }
+
+            //formatada
+            cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+            cpfInput.value = cpf;
+        }
+
+        function mascaraRG() {
+            const rgInput = document.getElementById('rg');
+            let rg = rgInput.value;
+
+            rg = rg.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+
+            if (rg.length > 9) {
+                rg = rg.substring(0, 9); // Limita a 9 dígitos
+            }
+
+            rg = rg.replace(/(\d{2})(\d{3})(\d{3})(\d{1})/, '$1.$2.$3-$4');
+            rgInput.value = rg;
+        }
+    </script>
+
+    <style>
+        .erro{
+            color: #dc3545;
+            height: 20px;
+        }
+
+        form{
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        Nome: <input type="text" name="nome" id="nome"><br>
+        <div class="erro" id="erro-nome"></div><br>
+
+        Endereço: <input type="text" name="endereco" id="endereco"><br>
+        <div class="erro" id="erro-endereco"></div><br>
+
+        Bairro: <input type="text" name="bairro" id="bairro"><br>
+        <div class="erro" id="erro-bairro"></div><br>
+        
+        CEP: <input type="text" name="cep" id="cep"><br>
+        <div class="erro" id="erro-cep"></div><br>
+        
+        Cidade: <input type="text" name="cidade" id="cidade"><br>
+        <div class="erro" id="erro-cidade"></div><br>
+        
+        Estado: <input type="text" name="estado" id="estado"><br>
+        <div class="erro" id="erro-estado"></div><br>
+        
+        Telefone Fixo: <input type="text" name="telefone_fixo" id="telefone_fixo"><br>
+        <div class="erro" id="erro-telefone"></div><br>
+        
+        Celular: <input type="text" name="celular" id="celular"><br>
+        <div class="erro" id="erro-celular"></div><br>
+        
+        RG: <input type="text" name="rg" id="rg" oninput="mascaraRG()"><br>
+        <div class="erro" id="erro-rg"></div><br>
+        
+        CPF: <input type="text" name="cpf" id="cpf" oninput="mascaraCPF()"><br>
+        <div class="erro" id="erro-cpf"></div><br>
+        
+
+        <div class="erro">
+            <p id="erro"></p>
+        </div>
+
+        <input type="button" onclick="validarDados()" value="Validar">
+    </form>
+</body>
+</html>
